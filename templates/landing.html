@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>One Piece API</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="bg">
+    <h1>One Piece API</h1>
+    <div>
+        <p>{{ instructions }}</p>
+        {% for c in criteria %}
+        <p> {{ c }}</p>
+        {% endfor %}
+        <form action = "/character" method = "POST">
+            <p>Search By:</p>
+            <p><input type = "text" name = "search_field"></p>
+            <p><input class="button" type = "submit" value = "submit"></p>
+        </form>
+    </div>
+</body>
+</html>
