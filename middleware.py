@@ -10,7 +10,6 @@ def search_filter(filter_by):
 
     return search(file, criteria)
 
-#
 def search(file, criteria):
     info = pd.read_csv(file)
     if "All" not in criteria:

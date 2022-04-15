@@ -3,6 +3,8 @@
 from flask import Flask
 from flask import request
 from flask import render_template
+from flask import redirect
+from flask import url_for
 from flask import jsonify
 from middleware import search_filter
 
@@ -19,25 +21,24 @@ search_criteria = ["[Character] - returns the names of characters who have eaten
     "[All] - No specific criteria. Returns all data",
     "Combine criteria for better results"]
 
-
-
 @app.route("/")
 def landing():
     return render_template("landing.html", instructions=instructions, criteria=search_criteria)
 
-
-@app.route("/character", methods=['GET', 'POST'])
-def character():
+@app.route("/search", methods=['POST'])
+def info():
     if request.method == 'POST':
         if request.form.get('search_field'):
             criteria = request.form.get('search_field').title()
-            results = search_filter(criteria)
         else:
-            results = search_filter("All")
-    else:
-        results = search_filter("All")
+            criteria = "All"
 
-    return jsonify(results)
+    return redirect(url_for("results", searched=criteria))
+
+@app.route('/searched/<searched>')
+def results(searched):
+    res = search_filter(searched)
+    return jsonify(res)
 
 
 if __name__ == "__main__":
