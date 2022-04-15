@@ -19,7 +19,7 @@ search_criteria = ["[Character] - returns the names of characters who have eaten
     "[Awakened] - returns yes or no as to whether the fruit is awakened or has awakening potential",
     "[Status] - returns whether the devil fruit has ever been consumed",
     "[All] - No specific criteria. Returns all data",
-    "Combine criteria for better results"]
+    "Combine criteria for better results (i.e. character, devil fruit)"]
 
 @app.route("/")
 def landing():
@@ -39,7 +39,6 @@ def info():
 def results(searched):
     res = search_filter(searched)
     return jsonify(res)
-
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=2224)

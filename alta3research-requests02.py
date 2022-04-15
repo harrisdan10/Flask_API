@@ -5,6 +5,8 @@ from pprint import pprint
 
 url = 'http://localhost:2224/searched'
 
+# vast number of endpoints depending on combined search criteria
+# below only returns results for All and singular criteria search
 all_resp = requests.get(f"{url}/All").json()
 char_resp = requests.get(f"{url}/Character").json()
 fruit_resp = requests.get(f"{url}/Devil Fruit").json()
@@ -13,4 +15,7 @@ sub_resp = requests.get(f"{url}/Subclass").json()
 stat_resp = requests.get(f"{url}/Status").json()
 awakened_resp = requests.get(f"{url}/Awakened").json()
 
-pprint(char_resp)
+# print(char_resp)
+
+for x in all_resp:
+    print(f'{x["Character"]} {x["Status"]} the {x["Devil Fruit"]} devil fruit. It is a {x["Class"]} type fruit, subclass {x["Subclass"]}.\n')
